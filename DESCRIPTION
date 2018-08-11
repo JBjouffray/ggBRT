@@ -4,6 +4,8 @@ Title: Explore and Visualise the Results of Boosted Regression Trees
 Version: 0.0.0.9000
 Author: Jean-Baptiste Jouffray
 Maintainer: Jean-Baptiste Jouffray <jean-baptiste.jouffray@su.se>
+URL: http://github.com/JBjouffray/ggBRT
+BugReports: http://github.com/JBjouffray/ggBRT/issues
 Description: A set of functions using ggplot2 (Wickham 2016) to explore and visualize the results of boosted regression trees fitted with gbm.step (Elith et al. 2008). The functions are largely based on original codes from the dismo package (Hijmans et al. 2017) and additional existing sources (e.g., Leathwick/Elith 2007, Pinsky and Byler 2015). It allows to input a series of parameters to facilitate the customization of the plots by the user. 'gbm.bootstrap.functions', 'plot.gbm.4list' and 'plot.gbm.boot' were originally written by Jane Elith and John Leathwick, but not released publicly. We thank them for providing this code.
 Depends:
     directlabels,
