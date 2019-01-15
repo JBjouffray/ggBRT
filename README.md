@@ -60,8 +60,3 @@ Wickham H. (2016). ggplot2: Elegant Graphics for Data Analysis. Springer-Verlag 
 
 Wickham H. and Francois R. (2016). dplyr: A Grammar of Data Manipulation. R package version0.5.0. https://CRAN.R-project.org/package=dplyr
 
-
-=======
-COMING SOON
-
->>>>>>> 5cff47a3218507b1d7f94b4e0b1be314e453eae7
