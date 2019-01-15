@@ -1,7 +1,6 @@
 # ggBRT
 Explore and visualise the results of boosted regression trees
 
-<<<<<<< HEAD
 **Author:** Jean-Baptiste Jouffray (2019)
 
 **Correspondence:** jean-baptiste.jouffray@su.se
