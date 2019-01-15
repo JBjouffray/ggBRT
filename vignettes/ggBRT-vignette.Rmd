@@ -47,9 +47,6 @@ brt2 <- gbm.step(data=dat, gbm.x = pred, gbm.y = which(names(dat) == 'Regime2'),
 brt3 <- gbm.step(data=dat, gbm.x = pred, gbm.y = which(names(dat) == 'Regime3'),
                  family = "bernoulli", tree.complexity = 3,
                  learning.rate = 0.01, bag.fraction = 0.75)
-brt5 <- gbm.step(data=dat, gbm.x = pred, gbm.y = which(names(dat) == 'Regime5'),
-                 family = "bernoulli", tree.complexity = 3,
-                 learning.rate = 0.01, bag.fraction = 0.75)
 ```
 
 
@@ -58,7 +55,7 @@ brt5 <- gbm.step(data=dat, gbm.x = pred, gbm.y = which(names(dat) == 'Regime5'),
 Function to extract the models performance of one or several boosted regression trees. Returns a data frame with mean total deviance, mean residual deviance, correlation, area under the receiver operating curve (AUC), percentage deviance explained, cross-validated deviance, cross-validated correlation, cross-validated AUC and cross-validated percentage deviance explained, calculated with the formula 1-(cross-validated deviance/Total.Deviance).
 
 ```{r, message=FALSE, warning=FALSE}
-ggPerformance(Regime1=brt1,Regime2=brt2,Regime3=brt3,Regime5=brt5)
+ggPerformance(Regime1=brt1,Regime2=brt2,Regime3=brt3)
 ```
 
 
@@ -80,7 +77,7 @@ ggInfluence(brt1, signif=T,col.bar = "darkred",main = "Relative influence - Regi
 Function to return and plot (heatmap) the relative influence of predictors from several boosted regression trees. The models need to have the same set of predictors. There are several parameters to customise the aesthetics of the plot, see `?ggMultiInfluence`.
 
 ```{r, message=FALSE,warning=FALSE,fig.align="center",dpi=300,out.width="700px", out.height="500px",fig.height=5,fig.width=7}
-ggMultiInfluence(Regime1=brt1,Regime2=brt2,Regime3=brt3,Regime5=brt5)
+ggMultiInfluence(Regime1=brt1,Regime2=brt2,Regime3=brt3)
 ```
 
 
@@ -90,12 +87,12 @@ Function to return the relative influence per category of predictors. If `signif
 
 ```{r, message=FALSE, warning=FALSE}
 # all predictors
-ggCatInfluence(brt1,brt2,brt3,brt5,category = "Category",data=PredictorsCat)
+ggCatInfluence(brt1,brt2,brt3,category = "Category",data=PredictorsCat)
 ```
 
 ```{r, message=FALSE, warning=FALSE}
 # significant predictors 
-ggCatInfluence(brt1,brt2,brt3,brt5,category = "Category",data=PredictorsCat, signif=T)
+ggCatInfluence(brt1,brt2,brt3,category = "Category",data=PredictorsCat, signif=T)
 ```
 
 
@@ -138,7 +135,7 @@ ggPD_boot(brt1, predictor="Complexity", list.4.preds=brt1.prerun, booted.preds=b
 Function to draw partial dependency plots with fitted **functions** from several boosted regression trees. The models need to have the same set of predictors. There are several parameters to customise the aesthetics of the plot: see `?ggMultiPD`.
 
 ```{r, message=FALSE, warning=FALSE,fig.align="center",dpi=300,out.width="700px", out.height="500px",fig.height=5,fig.width=7}
-ggMultiPD(brt1, brt5, predictor = "Complexity", legend.pos = "top", col.lines =c("blue","red"))
+ggMultiPD(brt1, brt3, predictor = "Complexity", legend.pos = "top", col.lines =c("blue","red"))
 ```
 
 
@@ -147,7 +144,7 @@ ggMultiPD(brt1, brt5, predictor = "Complexity", legend.pos = "top", col.lines =c
 Function to draw partial dependency plots with fitted **values** from several boosted regression trees. The models need to have the same set of predictors. There are several parameters to customise the aesthetics of the plot: see `?ggMultiPDfit`.
 
 ```{r, message=FALSE, warning=FALSE,fig.align="center",dpi=300,out.width="700px", out.height="500px",fig.height=5,fig.width=7}
-ggMultiPDfit(brt1, brt5, predictor = "Complexity", legend.pos = "top", col.dots =c("blue","red"), cex.dot=1.5, cex.smooth = 0.8)
+ggMultiPDfit(brt1, brt3, predictor = "Complexity", legend.pos = "top", col.dots =c("blue","red"), cex.dot=1.5, cex.smooth = 0.8)
 ```
 
 
