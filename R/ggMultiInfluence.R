@@ -56,5 +56,5 @@ ggMultiInfluence<-function (...,col.gradient=c("white","lightblue4"),round=1,
       geom_text(aes(label=value,size=value), color=col.text,show.legend = FALSE)}
 
   print(p)
-  return(Influence)
+  print(Influence,digits = 3)
 }

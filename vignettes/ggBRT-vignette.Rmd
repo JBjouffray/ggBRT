@@ -1,10 +1,10 @@
 ---
-title: "ggBRT - examples"
+title: "ggBRT - Tutorial"
 author: "Jean-Baptiste Jouffray"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteIndexEntry{ggBRT - Tutorial}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -16,50 +16,188 @@ knitr::opts_chunk$set(
 )
 ```
 
-Vignettes are long form documentation commonly included in packages. Because they are part of the distribution of the package, they need to be as compact as possible. The `html_vignette` output type provides a custom style sheet (and tweaks some options) to ensure that the resulting html is as small as possible. The `html_vignette` format:
-
-- Never uses retina figures
-- Has a smaller default figure size
-- Uses a custom CSS stylesheet instead of the default Twitter Bootstrap style
-
 ## Vignette Info
 
-Note the various macros within the `vignette` section of the metadata block above. These are required in order to instruct R how to build the vignette. Note that you should change the `title` field and the `\VignetteIndexEntry` to match the title of your vignette.
+This document is a package vignette for [ggBRT](https://github.com/JBjouffray/ggBRT) designed to explore and visualise the results of boosted regression trees fitted with the gbm.step routine in the [dismo](https://cran.r-project.org/web/packages/dismo/index.html) package. The vignette shows the use of every function in the package by using data from Jouffray et al. (2019), for which ggBRT was originally created.
 
-## Styles
+## Introduction
+The tutorial builds on data from 620 sites across the Hawaiian islands classified into four reef regimes. Each site is associated to a set of 20 biophysical and anthropogenic predictors. We use boosted regression trees (Elith et al. 2008) to model the occurence of each regime at each site based on those predictors. We start by computing boosted regression trees (BRT) with the gbm.step routine and then provide examples for every function included in ggBRT.
 
-The `html_vignette` template includes a basic CSS theme. To override this theme you can specify your own CSS in the document metadata as follows:
+```{r, message=FALSE, warning=FALSE}
+# Load ggBRT 
+library(ggBRT)
 
-    output: 
-      rmarkdown::html_vignette:
-        css: mystyles.css
+# Import data
+dat<-Hawaii_RegimesPredictors
+PredictorsCat<-Hawaii_PredictorsCategories
 
-## Figures
-
-The figure sizes have been customised so that you can easily put two images side-by-side. 
-
-```{r, fig.show='hold'}
-plot(1:10)
-plot(10:1)
+# Select the set of 20 predictors
+pred<-c(15:34)
 ```
 
-You can enable figure captions by `fig_caption: yes` in YAML:
 
-    output:
-      rmarkdown::html_vignette:
-        fig_caption: yes
-
-Then you can use the chunk option `fig.cap = "Your figure caption."` in **knitr**.
-
-## More Examples
-
-You can write math expressions, e.g. $Y = X\beta + \epsilon$, footnotes^[A footnote here.], and tables, e.g. using `knitr::kable()`.
-
-```{r, echo=FALSE, results='asis'}
-knitr::kable(head(mtcars, 10))
+```{r, eval=FALSE,message=FALSE, warning=FALSE, results="hide",fig.show="hide"}
+# Run the boosted regression trees analyses
+brt1 <- gbm.step(data=dat, gbm.x = pred, gbm.y = which(names(dat) == 'Regime1'),
+                 family = "bernoulli", tree.complexity = 3,
+                 learning.rate = 0.01, bag.fraction = 0.75)
+brt2 <- gbm.step(data=dat, gbm.x = pred, gbm.y = which(names(dat) == 'Regime2'),
+                 family = "bernoulli", tree.complexity = 3,
+                 learning.rate = 0.01, bag.fraction = 0.75)
+brt3 <- gbm.step(data=dat, gbm.x = pred, gbm.y = which(names(dat) == 'Regime3'),
+                 family = "bernoulli", tree.complexity = 3,
+                 learning.rate = 0.01, bag.fraction = 0.75)
+brt5 <- gbm.step(data=dat, gbm.x = pred, gbm.y = which(names(dat) == 'Regime5'),
+                 family = "bernoulli", tree.complexity = 3,
+                 learning.rate = 0.01, bag.fraction = 0.75)
 ```
 
-Also a quote using `>`:
 
-> "He who gives up [code] safety for [code] speed deserves neither."
-([via](https://twitter.com/hadleywickham/status/504368538874703872))
+## ggPerformance
+
+Function to extract the models performance of one or several boosted regression trees. Returns a data frame with mean total deviance, mean residual deviance, correlation, area under the receiver operating curve (AUC), percentage deviance explained, cross-validated deviance, cross-validated correlation, cross-validated AUC and cross-validated percentage deviance explained, calculated with the formula 1-(cross-validated deviance/Total.Deviance).
+
+```{r, message=FALSE, warning=FALSE}
+ggPerformance(Regime1=brt1,Regime2=brt2,Regime3=brt3,Regime5=brt5)
+```
+
+
+## ggInfluence
+
+Function to return a data frame with the relative influence of each predictor in the boosted regression trees and a bar plot. If `signif= TRUE`, retains only the "significant" predictors (100/number of predictors, Muller et al. 2013) and rescale their influence to 100. There are several parameters to customise the aesthetics of the plot, see `?ggInfluence`.
+
+```{r, message=FALSE, warning=FALSE,fig.align="center",dpi=300,out.width="700px", out.height="500px",fig.height=5,fig.width=7}
+ggInfluence(brt1)
+```
+
+```{r, message=FALSE, warning=FALSE,fig.align="center",dpi=300,out.width="600px", out.height="400px",fig.height=4,fig.width=6}
+ggInfluence(brt1, signif=T,col.bar = "darkred",main = "Relative influence - Regime 1")
+```
+
+
+## ggMultiInfluence
+
+Function to return and plot (heatmap) the relative influence of predictors from several boosted regression trees. The models need to have the same set of predictors. There are several parameters to customise the aesthetics of the plot, see `?ggMultiInfluence`.
+
+```{r, message=FALSE,warning=FALSE,fig.align="center",dpi=300,out.width="700px", out.height="500px",fig.height=5,fig.width=7}
+ggMultiInfluence(Regime1=brt1,Regime2=brt2,Regime3=brt3,Regime5=brt5)
+```
+
+
+## ggCatInfluence
+
+Function to return the relative influence per category of predictors. If `signif= TRUE`, retains only the "significant" predictors (100/number of predictors, Muller et al. 2013) and rescale their influence to 100.
+
+```{r, message=FALSE, warning=FALSE}
+# all predictors
+ggCatInfluence(brt1,brt2,brt3,brt5,category = "Category",data=PredictorsCat)
+```
+
+```{r, message=FALSE, warning=FALSE}
+# significant predictors 
+ggCatInfluence(brt1,brt2,brt3,brt5,category = "Category",data=PredictorsCat, signif=T)
+```
+
+
+## ggPD
+
+Function to draw partial dependency plots with fitted **function**. There are several parameters to customise the aesthetics of the plot: see `?ggPD`.
+
+```{r, message=FALSE, warning=FALSE,fig.align="center",dpi=300,out.width="700px", out.height="600px",fig.height=7,fig.width=8}
+ggPD(brt1,rug = T)
+```
+
+
+## ggPDfit
+
+Function to draw partial dependency plots with fitted **values**. There are several parameters to customise the aesthetics of the plot: see `?ggPDfit`.
+
+```{r, message=FALSE, warning=FALSE,fig.align="center",dpi=300,out.width="700px", out.height="600px",fig.height=7,fig.width=8}
+ggPDfit(brt1)
+```
+
+
+## ggPD_boot
+
+Function to draw partial dependency plots with fitted function and confidence intervals obtained through bootstrapping (with replacement). There are several parameters to customise the aesthetics of the plot: see `?ggPDboot`.
+
+```{r, eval=FALSE, message=FALSE, warning=FALSE,results="hide"}
+# Boostrap the BRT 1000 times to build confidence intervals
+brt1.prerun<- plot.gbm.4list(brt1)
+brt1.boot <- gbm.bootstrap.functions(brt1, list.predictors=brt1.prerun, n.reps=100)
+```
+
+```{r, message=FALSE, warning=FALSE,fig.align="center",dpi=300,out.width="700px", out.height="500px",fig.height=5,fig.width=7}
+# Draw partial dependency plots a given predictor (i.e., "Complexity")
+ggPD_boot(brt1, predictor="Complexity", list.4.preds=brt1.prerun, booted.preds=brt1.boot$function.preds, type.ci = "ribbon",rug = T)
+```
+
+
+## ggMultiPD
+
+Function to draw partial dependency plots with fitted **functions** from several boosted regression trees. The models need to have the same set of predictors. There are several parameters to customise the aesthetics of the plot: see `?ggMultiPD`.
+
+```{r, message=FALSE, warning=FALSE,fig.align="center",dpi=300,out.width="700px", out.height="500px",fig.height=5,fig.width=7}
+ggMultiPD(brt1, brt5, predictor = "Complexity", legend.pos = "top", col.lines =c("blue","red"))
+```
+
+
+## ggMultiPDfit
+
+Function to draw partial dependency plots with fitted **values** from several boosted regression trees. The models need to have the same set of predictors. There are several parameters to customise the aesthetics of the plot: see `?ggMultiPDfit`.
+
+```{r, message=FALSE, warning=FALSE,fig.align="center",dpi=300,out.width="700px", out.height="500px",fig.height=5,fig.width=7}
+ggMultiPDfit(brt1, brt5, predictor = "Complexity", legend.pos = "top", col.dots =c("blue","red"), cex.dot=1.5, cex.smooth = 0.8)
+```
+
+
+## ggInteract_list
+
+Function to return the interactions sizes for a given boosted regression trees.
+
+```{r, message=FALSE, warning=FALSE}
+ggInteract_list(brt2,index = F)
+```
+
+
+## ggInteract_boot
+
+Function to randomize the response n times to generate a distribution under the null hypothesis of no interaction among predictors for one or several pairs of predictors (following Pinsky and Byler 2015). Model parameters should be the same as for the observed interaction strength. Results allow to compare with observed interaction strength.
+
+```{r, eval=FALSE, message=FALSE, warning=FALSE,results="hide"}
+
+# Randomization of the response to test significance of the two strongest interactions
+Interact_boot_brt2<-ggInteract_boot(c('WAV_CLIM_M','SST_STD'),c('Depth','WAV_CLIM_M'),nboots = 100,data=dat, predictors = pred, response=which(names(dat) == 'Regime2'),family = "bernoulli", tc = 5, lr = 0.001, bf= 0.75,global.env=F)
+```
+
+
+## ggInteract_2D
+
+Function to draw 2D interaction plot showing predicted values for two predictors from a boosted regression trees. Values for all other variables are set at their mean by default. There are several parameters to customise the aesthetics of the plot: see `?ggInteract_2D`.
+
+```{r, message=FALSE, warning=FALSE, fig.align="center",dpi=300,out.width="700px", out.height="500px",fig.height=5,fig.width=7}
+ggInteract_2D(gbm.object = brt2,x="WAV_CLIM_M",y="SST_STD",col.gradient = c("white","#5576AF"),show.dot = T,col.dot = "grey20",alpha.dot = 0.5,cex.dot = 0.2,label.contour = T,col.contour = "#254376",show.axis = T,legend = T)
+```
+
+
+## ggInteract_3D
+
+Function to draw 3D interaction plot showing predicted values for two predictors from a boosted regression trees. Values for all other variables are set at their mean by default. Possibility to export an interactive version of the plot in html format. There are several parameters to customise the aesthetics of the plot: see `?ggInteract_3D`.
+
+```{r, message=FALSE, warning=FALSE,fig.align="center",dpi=300,out.width="700px", out.height="500px",fig.height=5,fig.width=6}
+ggInteract_3D(brt2,x="WAV_CLIM_M",y="SST_STD")
+```
+
+## References
+
+Elith, J., Leathwick, J. R., & Hastie, T. (2008). A working guide to boosted regression trees. Journal of Animal Ecology, 77(4), 802-813.
+
+Jouffray JB, Wedding L.M., Norstrom A.V., Donovan M.K., Williams G.J., Crowder L.B., Erickson A.L., Friedlander A.M., Graham N.A.J., Gove J.M., Kappel C.V., Kittinger J.N., Lecky J., Oleson K.L.L., Selkoe K.A., White C., Williams I.D., Nystrom M. (2019). Parsing Human and Biophysical Drivers of Coral Reef Regimes. Proc. R. Soc. B.
+
+Müller, D., Leitão, P. J., & Sikor, T. (2013). Comparing the determinants of cropland abandonment in Albania and Romania using boosted regression trees. Agricultural Systems, 117, 66-77.
+
+Pinsky, M. L., & Byler, D. (2015). Fishing, fast growth and climate variability increase the risk of collapse. In Proc. R. Soc. B (Vol. 282, No. 1813, p. 20151053). The Royal Society.
+
+
+---
+
