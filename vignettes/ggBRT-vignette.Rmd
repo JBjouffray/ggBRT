@@ -164,7 +164,7 @@ Function to randomize the response n times to generate a distribution under the 
 ```{r, eval=FALSE, message=FALSE, warning=FALSE,results="hide"}
 
 # Randomization of the response to test significance of the two strongest interactions
-Interact_boot_brt2<-ggInteract_boot(c('WAV_CLIM_M','SST_STD'),c('Depth','WAV_CLIM_M'),nboots = 100,data=dat, predictors = pred, response=which(names(dat) == 'Regime2'),family = "bernoulli", tc = 5, lr = 0.001, bf= 0.75,global.env=F)
+Interact_boot_brt2<-ggInteract_boot(c('WAV_CLIM_M','SST_STD'),c('Depth','WAV_CLIM_M'),nboots = 10,data=dat, predictors = pred, response=which(names(dat) == 'Regime2'),family = "bernoulli", tc = 5, lr = 0.001, bf= 0.75,global.env=F)
 ```
 
 
@@ -193,7 +193,7 @@ Jouffray JB, Wedding L.M., Norstrom A.V., Donovan M.K., Williams G.J., Crowder L
 
 Müller, D., Leitão, P. J., & Sikor, T. (2013). Comparing the determinants of cropland abandonment in Albania and Romania using boosted regression trees. Agricultural Systems, 117, 66-77.
 
-Pinsky, M. L., & Byler, D. (2015). Fishing, fast growth and climate variability increase the risk of collapse. In Proc. R. Soc. B (Vol. 282, No. 1813, p. 20151053). The Royal Society.
+Pinsky, M. L., & Byler, D. (2015). Fishing, fast growth and climate variability increase the risk of collapse. In Proc. R. Soc. B (Vol. 282, No. 1813, p. 20151053).
 
 
 ---
