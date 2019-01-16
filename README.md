@@ -24,7 +24,8 @@ devtools::install_github("JBjouffray/ggBRT")
 ## Usage
 [ggBRT](https://github.com/JBjouffray/ggBRT) is designed for use with object of S3 class gbm, obtained from the gbm.step routine in the [dismo](https://cran.r-project.org/web/packages/dismo/index.html) package. 
 
-A vignette with examples for each function using data from Jouffray et al. (2019) is available [here](https://github.com/JBjouffray/ggBRT/tree/master/vignettes).
+Examples for each function using data from Jouffray et al. (2019) are presented in the [vignette](https://jbjouffray.github.io/ggBRT/ggBRT_Tutorial.html).
+
 
 ## Citation
 The package [ggBRT](https://github.com/JBjouffray/ggBRT) originally accompanied: 
