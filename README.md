@@ -17,14 +17,14 @@ The functions are largely based on codes from the [dismo](https://cran.r-project
 ## Installation 
 
 ``` r
-install.packages("devtools") # in case package "devtools" is not already installed
-devtools::install_github("JBjouffray/ggBRT")
+install.packages("devtools") # in case "devtools" has not already been installed
+devtools::install_github("JBjouffray/ggBRT") # will take several minutes to install
 ```
 
 ## Usage
 [ggBRT](https://github.com/JBjouffray/ggBRT) is designed for use with object of S3 class gbm, obtained from the gbm.step routine in the [dismo](https://cran.r-project.org/web/packages/dismo/index.html) package. 
 
-Examples for each function using data from Jouffray et al. (2019) are presented in the [vignette](https://jbjouffray.github.io/ggBRT/ggBRT_Tutorial.html).
+Examples for each function using data from Jouffray et al. (2019) are found in this [vignette](https://jbjouffray.github.io/ggBRT/ggBRT_Tutorial.html).
 
 
 ## Citation
