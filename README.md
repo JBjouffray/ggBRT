@@ -30,7 +30,7 @@ Examples of each function using data from Jouffray et al. (2019) can be found in
 ## Citation
 The package [ggBRT](https://github.com/JBjouffray/ggBRT) originally accompanied:
 
-Jouffray J-B et al. 2019 [Parsing human and biophysical drivers of coral reef regimes](http://dx.doi.org/10.1098/rspb.2018.2544). _Proc. R. Soc. B_ 286: 20182544. 
+Jouffray J-B _et al_. 2019 [Parsing human and biophysical drivers of coral reef regimes](http://dx.doi.org/10.1098/rspb.2018.2544). _Proc. R. Soc. B_ 286: 20182544. 
 
 
 ## References
@@ -45,9 +45,9 @@ Hijmans R.J., Phillips S., Leathwick J.R. and Elith J. (2017). dismo: Species Di
 
 Hocking T. (2017). directlabels: Direct Labels for Multicolor Plots. R package version 2017.01.03. http://directlabels.r-forge.r-project.org/
 
-Jouffray JB, Wedding L.M., Norstrom A.V., Donovan M.K., Williams G.J., Crowder L.B., Erickson A.L., Friedlander A.M., Graham N.A.J., Gove J.M., Kappel C.V., Kittinger J.N., Lecky J., Oleson K.L.L., Selkoe K.A., White C., Williams I.D., Nystrom M. (2019). Parsing Human and Biophysical Drivers of Coral Reef Regimes. _Proc. R. Soc. B_ 286: 20182544. 
+Jouffray J-B, Wedding L.M., Norstrom A.V., Donovan M.K., Williams G.J., Crowder L.B., Erickson A.L., Friedlander A.M., Graham N.A.J., Gove J.M., Kappel C.V., Kittinger J.N., Lecky J., Oleson K.L.L., Selkoe K.A., White C., Williams I.D. and Nystrom M. (2019). Parsing Human and Biophysical Drivers of Coral Reef Regimes. Proc. R. Soc. B 286: 20182544. 
 
-Pinsky, M. L., & Byler, D. (2015). Fishing, fast growth and climate variability increase the risk of collapse. In Proc. R. Soc. B (Vol. 282, No. 1813, p. 20151053). The Royal Society.
+Pinsky, M. L., & Byler, D. (2015). Fishing, fast growth and climate variability increase the risk of collapse. Proc. R. Soc. B (Vol. 282, No. 1813, p. 20151053).
 
 Sievert C., Parmer C., Hocking T., Chamberlain S., Ram K., Corvellec M. and Despouy P. (2017). plotly: Create Interactive Web Graphics via 'plotly.js'.
 https://plot.ly/r, https://cpsievert.github.io/plotly_book/
