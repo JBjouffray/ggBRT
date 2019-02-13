@@ -24,13 +24,13 @@ devtools::install_github("JBjouffray/ggBRT") # will take several minutes to inst
 ## Usage
 [ggBRT](https://github.com/JBjouffray/ggBRT) is designed for use with object of S3 class gbm, obtained from the gbm.step routine in the [dismo](https://cran.r-project.org/web/packages/dismo/index.html) package. 
 
-Examples of each function using data from Jouffray et al. (2019) can be found in this [vignette](https://jbjouffray.github.io/ggBRT/ggBRT_Tutorial.html).
+Examples of each function using data from Jouffray _et al_. (2019) can be found in this [vignette](https://jbjouffray.github.io/ggBRT/ggBRT_Tutorial.html).
 
 
 ## Citation
 The package [ggBRT](https://github.com/JBjouffray/ggBRT) originally accompanied:
 
-Jouffray J-B _et al_. 2019 [Parsing human and biophysical drivers of coral reef regimes](http://dx.doi.org/10.1098/rspb.2018.2544). _Proc. R. Soc. B_ 286: 20182544. 
+Jouffray JB _et al_. 2019 [Parsing human and biophysical drivers of coral reef regimes](http://dx.doi.org/10.1098/rspb.2018.2544). _Proc. R. Soc. B_ 286: 20182544. 
 
 
 ## References
