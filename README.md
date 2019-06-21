@@ -28,7 +28,6 @@ Examples of each function using data from Jouffray _et al_. (2019) can be found 
 
 
 ## Citation
-The package [ggBRT](https://github.com/JBjouffray/ggBRT) originally accompanied:
 
 Jouffray JB _et al_. 2019 [Parsing human and biophysical drivers of coral reef regimes](http://dx.doi.org/10.1098/rspb.2018.2544). _Proc. R. Soc. B_ 286: 20182544. 
 
