@@ -82,16 +82,14 @@ ggPD_boot<-function (gbm.object,predictor = NULL,n.plots = length(pred.names),li
         predictors[[j]] <- factor(predictors[[j]], levels = levels(data[,gbm.call$gbm.x[k]]))
       }
 
-      #responses[[j]] <- response.matrix[, 2] - mean(response.matrix[, 2])
-      #taking away the mean mucks up the real values.
+      responses[[j]] <- response.matrix[, 2] - mean(response.matrix[, 2])
 
       num.values <- nrow(response.matrix)
-      responses[[j]] <- response.matrix[,2]
 
-      temp <-apply(booted.preds[,k,], 1, function(x){quantile(x, cis[1],na.rm=T)})
+      temp <-apply(booted.preds[,k,]- mean(booted.preds[,k,]), 1, function(x){quantile(x, cis[1],na.rm=T)})
       responses.lower[[j]] <- temp[1:num.values]
 
-      temp <-apply(booted.preds[,k,], 1, function(x){quantile(x, cis[2],na.rm=T)})
+      temp <-apply(booted.preds[,k,]- mean(booted.preds[,k,]), 1, function(x){quantile(x, cis[2],na.rm=T)})
       responses.upper[[j]] <- temp[1:num.values]
 
       if(j == 1) {
