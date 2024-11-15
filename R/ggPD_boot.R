@@ -165,7 +165,7 @@ ggPD_boot<-function (gbm.object,predictor = NULL,n.plots = length(pred.names),li
                   axis.line.x=element_line(size=0.1))
 
           if (smooth==T){
-            ggPD[[i]]<-ggPD[[i]]+geom_smooth(span=span,size=0.3,color=col.smooth,se=F,linetype=2)
+            ggPD[[i]]<-ggPD[[i]]+geom_smooth(span=span,size=cex.smooth,color=col.smooth,se=F,linetype=2)
           }
 
           if (rug==T){
@@ -191,7 +191,7 @@ ggPD_boot<-function (gbm.object,predictor = NULL,n.plots = length(pred.names),li
                   axis.line.x=element_line(size=0.1))
 
           if (smooth==T){
-            ggPD[[i]]<-ggPD[[i]]+geom_smooth(data=fittedFunc[[i]],aes(x=x,y=y),span=span,size=0.3,color=col.smooth,se=F,linetype=2)
+            ggPD[[i]]<-ggPD[[i]]+geom_smooth(data=fittedFunc[[i]],aes(x=x,y=y),span=span,size=cex.smooth,color=col.smooth,se=F,linetype=2)
           }
 
           if (rug==T){
@@ -262,7 +262,7 @@ ggPD_boot<-function (gbm.object,predictor = NULL,n.plots = length(pred.names),li
                 axis.line.x=element_line(size=0.1))
 
         if (smooth==T){
-          ggPD<-ggPD+geom_smooth(span=span,size=0.3,color=col.smooth,se=F,linetype=2)
+          ggPD<-ggPD+geom_smooth(span=span,size=cex.smooth,color=col.smooth,se=F,linetype=2)
         }
 
         if (rug==T){
@@ -288,7 +288,7 @@ ggPD_boot<-function (gbm.object,predictor = NULL,n.plots = length(pred.names),li
                 axis.line.x=element_line(size=0.1))
 
         if (smooth==T){
-          ggPD<-ggPD+geom_smooth(data=fittedFunc,aes(x=x,y=y),span=span,size=0.3,color=col.smooth,se=F,linetype=2)
+          ggPD<-ggPD+geom_smooth(data=fittedFunc,aes(x=x,y=y),span=span,size=cex.smooth,color=col.smooth,se=F,linetype=2)
         }
 
         if (rug==T){
