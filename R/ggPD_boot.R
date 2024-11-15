@@ -24,13 +24,14 @@
 #' @param span span of the smoother (default = 0.3)
 #' @param rug Logical. If TRUE (default FALSE), add rugs to the plot indicating the actual data points
 #' @param rug.pos position of the rugs (default = "t"). Can be either "t" (top), "l" (left), "b" (bottom), or "r" (right)
+#' @param col.rug color of the rugs (default #EBEBEB)
 #' @param y.label title for the y-axis (default = "Fitted function")
 #' @param x.label title for the x-axis (by default the predictor name and its relative influence)
 #' @export
 
 ggPD_boot<-function (gbm.object,predictor = NULL,n.plots = length(pred.names),list.4.preds=NULL,booted.preds=NULL, nrow=NULL,ncol=NULL,
                      col.line="darkorange",cex.line=0.5, type.ci="lines",col.ci= "grey80",cex.ci=0.3,lty.ci=2, alpha.ci=0.5,smooth = FALSE,
-                     col.smooth="blue",cex.smooth=0.3,span=0.3,rug = FALSE,rug.pos="t",common.scale = TRUE,cis=c(0.025, 0.975),
+                     col.smooth="blue",cex.smooth=0.3,span=0.3,rug = FALSE,rug.pos="t",col.rug = "#EBEBEB", common.scale = TRUE,cis=c(0.025, 0.975),
                      y.label = "Fitted function",x.label=NULL,...){
 
   gbm.call <- gbm.object$gbm.call
@@ -169,7 +170,7 @@ ggPD_boot<-function (gbm.object,predictor = NULL,n.plots = length(pred.names),li
           }
 
           if (rug==T){
-            ggPD[[i]]<-ggPD[[i]]+geom_rug(data=fittedVal[[i]],aes(x=x,y=y),sides=rug.pos,position="jitter",color="#EBEBEB")
+            ggPD[[i]]<-ggPD[[i]]+geom_rug(data=fittedVal[[i]],aes(x=x,y=y),sides=rug.pos,position="jitter",color=col.rug)
           }
 
           if (common.scale==T){
@@ -195,7 +196,7 @@ ggPD_boot<-function (gbm.object,predictor = NULL,n.plots = length(pred.names),li
           }
 
           if (rug==T){
-            ggPD[[i]]<-ggPD[[i]]+geom_rug(data=fittedVal[[i]],aes(x=x,y=y),sides=rug.pos,position="jitter",color="#EBEBEB")
+            ggPD[[i]]<-ggPD[[i]]+geom_rug(data=fittedVal[[i]],aes(x=x,y=y),sides=rug.pos,position="jitter",color=col.rug)
           }
 
           if (common.scale==T){
@@ -266,7 +267,7 @@ ggPD_boot<-function (gbm.object,predictor = NULL,n.plots = length(pred.names),li
         }
 
         if (rug==T){
-          ggPD<-ggPD+geom_rug(data=fittedVal,aes(x=x,y=y),sides=rug.pos,position="jitter",color="#EBEBEB")
+          ggPD<-ggPD+geom_rug(data=fittedVal,aes(x=x,y=y),sides=rug.pos,position="jitter",color=col.rug)
         }
 
         if (common.scale==T){
@@ -292,7 +293,7 @@ ggPD_boot<-function (gbm.object,predictor = NULL,n.plots = length(pred.names),li
         }
 
         if (rug==T){
-          ggPD<-ggPD+geom_rug(data=fittedVal,aes(x=x,y=y),sides=rug.pos,position="jitter",color="#EBEBEB")
+          ggPD<-ggPD+geom_rug(data=fittedVal,aes(x=x,y=y),sides=rug.pos,position="jitter",color=col.rug)
         }
 
         if (common.scale==T){
